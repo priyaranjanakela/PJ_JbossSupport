@@ -1,0 +1,20 @@
+---
+- name: Ansible Find Example
+  hosts: webservers
+  tasks:
+   - set_fact:
+       ansible_python_interpreter: '{{ ansible_playbook_python }}'
+    delegate_to: webservers   
+    delegate_facts: true
+
+   - name : Find files bigger than 100mb in size
+     become: true
+     find:
+       paths: /tmp
+       file_type: file
+       size: 10m
+       recurse: yes
+     register: output
+
+   - debug: var=item.path
+     with_items: "{{ output.files }}"

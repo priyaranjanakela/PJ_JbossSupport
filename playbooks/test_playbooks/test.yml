@@ -1,0 +1,14 @@
+---
+- name: Ansible Find Example
+  hosts: webservers
+  tasks:
+
+- name: Recursively find /tmp files older than 4 weeks and equal or greater than 1 megabyte
+  find:
+    paths: /tmp
+    age: 4w
+    size: 1m
+    recurse: yes
+
+   - debug: var=item.path
+     with_items: "{{ output.files }}"
