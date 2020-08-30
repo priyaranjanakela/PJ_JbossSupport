@@ -1,6 +1,6 @@
 ---
 - name: Ansible Find Example
-  hosts: webservers
+  hosts: 172.31.60.32 
   tasks:
    - name : Find files bigger than 100mb in size
      become: true
